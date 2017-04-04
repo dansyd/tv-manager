@@ -25,6 +25,7 @@ header {
   background: rgb(0, 223, 190);
   color: white;
   border-radius: 4px;
+  padding: 7px 13px;
 }
 
 .cta {

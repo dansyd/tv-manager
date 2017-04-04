@@ -22,3 +22,9 @@ a {
   cursor: pointer;
   padding: 7px 13px;
 }
+
+button {
+  border: 0;
+}
+
+textarea, input, button { outline: none; }
