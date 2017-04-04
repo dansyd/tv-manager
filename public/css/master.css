@@ -1,0 +1,43 @@
+@import "base.css";
+
+header {
+  padding: 20px;
+  background-color: rgb(50, 50, 50);
+  color: white;
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 2.5em;
+}
+
+.main-nav a {
+  color: white;
+}
+
+.main-btn, button {
+  background: rgb(0, 223, 190);
+  color: white;
+  border-radius: 4px;
+}
+
+.cta {
+  background-color: rgb(233, 233, 233);
+  padding: 3em 0;
+}
+
+.cta-message {
+  text-align: center;
+}
+
+.cta-message h1 {
+  border-bottom: 1px solid rgb(0, 223, 190);
+  display: inline-block;
+  padding-bottom: 20px;
+}
