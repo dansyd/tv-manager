@@ -10,14 +10,41 @@ const ROOT_URL = 'https://api.themoviedb.org/3/'
 class App extends Component {
   constructor() {
     super();
-    this.state = { shows: [] , urlConfig: null };
+
+    this.handleSearchTermChange = this.handleSearchTermChange.bind(this);
+    this.state = { shows: [], urlConfig: null, searchTerm: null };
   }
 
   componentWillMount() {
-    let url = `${ROOT_URL}discover/tv?api_key=${api_key}&sort_by=popularity.desc&first_air_date_year=2016&page=1`
+    let url = `${ROOT_URL}discover/tv?api_key=${api_key}&sort_by=popularity.desc&first_air_date_year=2016&with_original_language=en&page=1`
     axios.get(url)
       .then( response => {
-        this.setState({ shows: response.data.results });
+        const shows = response.data.results;
+        this.setState({ shows });
+      }).catch(error => {
+        throw error;
+      });
+
+    url = `${ROOT_URL}configuration?api_key=${api_key}`
+    axios.get(url)
+      .then( response => {
+        const urlConfig = response.data.images;
+        this.setState({ urlConfig });
+      }).catch(error => {
+        throw error;
+      });
+  }
+
+  componentDidUpdate() {
+
+  }
+
+  handleSearchTermChange(term) {
+    const url = `${ROOT_URL}search/tv?api_key=${api_key}&query=${term}&page=1`
+    axios.get(url)
+      .then( response => {
+        const shows = response.data.results;
+        this.setState({ shows, searchTerm: term });
       }).catch(error => {
         throw error;
       });
@@ -26,8 +53,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <SearchBar />
-        <ShowsList shows={ this.state.shows } />
+        <SearchBar onSearchTermChange={this.handleSearchTermChange} />
+        <ShowsList data={this.state} />
       </div>
     );
   }

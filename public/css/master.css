@@ -21,11 +21,23 @@ header {
   color: white;
 }
 
-.main-btn, button {
+button,
+.main-btn {
+  font-size: 1em;
+  line-height: 1.4em;
   background: rgb(0, 223, 190);
   color: white;
   border-radius: 4px;
   padding: 7px 13px;
+  border: 2px solid white;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.2s;
+}
+
+button:hover,
+.main-btn:hover {
+background-color: white;
+color: rgb(0, 223, 190);
 }
 
 .cta {

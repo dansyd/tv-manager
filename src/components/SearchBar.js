@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './css/SearchBar.css';
 
-const SearchBar = (props) => {
-  return (
-    <div className="SearchBar">
-      <div className="container">
-        <form>
-          <input type="text" placeholder="Enter the name of the show" />
-          <button type="submit" className="main-btn">Search</button>
-        </form>
+
+class SearchBar extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    // this.setState({ term: this.refs.inputSearch.value });
+    this.props.onSearchTermChange(this.refs.inputSearch.value);
+    this.refs.inputSearch.value = '';
+  }
+
+  render() {
+    return (
+      <div className="search-bar">
+        <div className="container">
+          <form onSubmit={this.handleSubmit} >
+            <input type="text" ref="inputSearch" placeholder="Enter the name of the show" />
+            <button type="submit" className="main-btn">Search</button>
+          </form>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default SearchBar
