@@ -11,7 +11,7 @@ const renderShows = (data) => {
       <li key={show.id} className="shows-list-item">
         <h3>{show.name}</h3>
         <img src={url + posterSizes + show.poster_path} alt={`${show.name} poster`}/>
-        <ShowControls />
+        <ShowControls showId={show.id}/>
       </li>
     )
   })

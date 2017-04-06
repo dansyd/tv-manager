@@ -1,0 +1,14 @@
+.cta {
+  background-color: rgb(233, 233, 233);
+  padding: 3em 0;
+}
+
+.cta-message {
+  text-align: center;
+}
+
+.cta-message h1 {
+  border-bottom: 2px solid rgb(0, 223, 190);
+  display: inline-block;
+  padding-bottom: 20px;
+}

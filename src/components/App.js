@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import './css/App.css';
 import SearchBar from './SearchBar';
 import ShowsList from './ShowsList';
+import CTA from './static/CTA.js';
 import axios from 'axios';
 import { api_key } from '../config';
+import { TMDB_ROOT_URL } from '../index';
 
-const ROOT_URL = 'https://api.themoviedb.org/3/'
 
 class App extends Component {
   constructor() {
@@ -20,7 +21,7 @@ class App extends Component {
   componentWillMount() {
     this.fetchDiscoverTVShows();
 
-    const url = `${ROOT_URL}configuration?api_key=${api_key}`
+    const url = `${TMDB_ROOT_URL}configuration?api_key=${api_key}`
     axios.get(url)
       .then( response => {
         const urlConfig = response.data.images;
@@ -31,7 +32,7 @@ class App extends Component {
   }
 
   fetchDiscoverTVShows() {
-    const url = `${ROOT_URL}discover/tv?api_key=${api_key}&sort_by=popularity.desc&first_air_date_year=2016&with_original_language=en&page=1`
+    const url = `${TMDB_ROOT_URL}discover/tv?api_key=${api_key}&sort_by=popularity.desc&first_air_date_year=2016&with_original_language=en&page=1`
     axios.get(url)
       .then( response => {
         const shows = response.data.results;
@@ -46,7 +47,7 @@ class App extends Component {
   }
 
   handleSearchTermChange(term) {
-    const url = `${ROOT_URL}search/tv?api_key=${api_key}&query=${term}&page=1`
+    const url = `${TMDB_ROOT_URL}search/tv?api_key=${api_key}&query=${term}&page=1`
     axios.get(url)
       .then( response => {
         const shows = response.data.results;
@@ -59,6 +60,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <CTA />
         <SearchBar onSearchTermChange={this.handleSearchTermChange} />
         <ShowsList data={this.state} onClearSearch={this.handleClearSearch}/>
       </div>
