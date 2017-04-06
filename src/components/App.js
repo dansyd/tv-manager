@@ -12,20 +12,15 @@ class App extends Component {
     super();
 
     this.handleSearchTermChange = this.handleSearchTermChange.bind(this);
+    this.handleClearSearch = this.handleClearSearch.bind(this);
+
     this.state = { shows: [], urlConfig: null, searchTerm: null };
   }
 
   componentWillMount() {
-    let url = `${ROOT_URL}discover/tv?api_key=${api_key}&sort_by=popularity.desc&first_air_date_year=2016&with_original_language=en&page=1`
-    axios.get(url)
-      .then( response => {
-        const shows = response.data.results;
-        this.setState({ shows });
-      }).catch(error => {
-        throw error;
-      });
+    this.fetchDiscoverTVShows();
 
-    url = `${ROOT_URL}configuration?api_key=${api_key}`
+    const url = `${ROOT_URL}configuration?api_key=${api_key}`
     axios.get(url)
       .then( response => {
         const urlConfig = response.data.images;
@@ -35,8 +30,19 @@ class App extends Component {
       });
   }
 
-  componentDidUpdate() {
+  fetchDiscoverTVShows() {
+    const url = `${ROOT_URL}discover/tv?api_key=${api_key}&sort_by=popularity.desc&first_air_date_year=2016&with_original_language=en&page=1`
+    axios.get(url)
+      .then( response => {
+        const shows = response.data.results;
+        this.setState({ shows, searchTerm: null });
+      }).catch(error => {
+        throw error;
+      });
+  }
 
+  handleClearSearch() {
+    this.fetchDiscoverTVShows();
   }
 
   handleSearchTermChange(term) {
@@ -54,7 +60,7 @@ class App extends Component {
     return (
       <div className="App">
         <SearchBar onSearchTermChange={this.handleSearchTermChange} />
-        <ShowsList data={this.state} />
+        <ShowsList data={this.state} onClearSearch={this.handleClearSearch}/>
       </div>
     );
   }

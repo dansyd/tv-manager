@@ -17,13 +17,13 @@ const renderShows = (data) => {
   })
 }
 
-const ShowsList = ({data}) => {
+const ShowsList = ({data, onClearSearch}) => {
   if (!data.urlConfig) {
     return <div>Loading.....</div>
   }
   return (
     <div className="shows container">
-      <SearchFilter searchTerm={data.searchTerm}/>
+      <SearchFilter searchTerm={data.searchTerm} onClearSearch={onClearSearch}/>
       <ul className="shows-list">
         {renderShows(data)}
       </ul>
