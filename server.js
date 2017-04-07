@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const path = require('path');
 const axios = require('axios');
 
 const api_key = require('./config');
@@ -13,21 +14,34 @@ app.use(bodyParser.json({ type: '*/*' }));
 const router = express.Router();
 app.use('/api', router);
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
+// // Serve static assets
+// app.use(express.static(path.resolve(__dirname, 'build')));
+//
+// // Always return the main index.html, so react-router render the route in the client
+// app.get('/', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+// });
+
 // Routes
 router.get('/discover', function(req, res) {
   const url = ROOT_URL + 'discover/tv?api_key=' + api_key + '&sort_by=popularity.desc&first_air_date_year=2016&with_original_language=en&page=1';
     axios.get(url)
       .then( function(response) {
+        res.send(response.data.results);
+      }).catch(function(error) {
+        throw error;
+      });
+});
 
-          const url_config = ROOT_URL + 'configuration?api_key=' + api_key;
-            axios.get(url_config)
-              .then( function(config) {
-                res.send(buildImageUrl(response.data.results, config.data));
-              }).catch(function(error) {
-                throw error;
-              });
-
-        // res.send(response.data.results);
+router.get('/config', function(req, res) {
+  const url_config = ROOT_URL + 'configuration?api_key=' + api_key;
+    axios.get(url_config)
+      .then( function(config) {
+        res.send(config.data);
       }).catch(function(error) {
         throw error;
       });

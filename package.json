@@ -1,26 +1,23 @@
 {
   "name": "tv-manager",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Simple TV shows watchlist manager",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Daniele Peviani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dansyd/tv-manager/issues"
+  },
+  "homepage": "https://github.com/dansyd/tv-manager#readme",
   "dependencies": {
-    "axios": "^0.16.0",
-    "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "morgan": "^1.8.1",
-    "nodemon": "^1.11.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-icons": "^2.2.3",
-    "react-router-dom": "^4.0.0"
+    "nodemon": "^1.11.0"
   },
-  "devDependencies": {
-    "react-scripts": "0.9.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "dev": "nodemon server.js"
-  }
+  "devDependencies": {}
 }

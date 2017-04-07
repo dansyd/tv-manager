@@ -12,14 +12,14 @@ class App extends Component {
     this.handleSearchTermChange = this.handleSearchTermChange.bind(this);
     this.handleClearSearch = this.handleClearSearch.bind(this);
 
-    this.state = { shows: [], urlConfig: null, searchTerm: null };
+    this.state = { shows: [], configUrl: null, searchTerm: null };
   }
 
   fetchDiscoverTVShows() {
-    const url = 'http://localhost:8080/api/discover'
+    const url = '/api/discover'
     axios.get(url)
       .then( response => {
-        const shows = response.data.results;
+        const shows = response.data;
         this.setState({ shows, searchTerm: null });
       }).catch(error => {
         throw error;
@@ -28,6 +28,14 @@ class App extends Component {
 
   componentWillMount() {
     this.fetchDiscoverTVShows();
+    const url = '/api/config'
+    axios.get(url)
+      .then( response => {
+        const configUrl = response.data;
+        this.setState({ configUrl });
+      }).catch(error => {
+        throw error;
+      });
   }
 
   handleClearSearch() {
