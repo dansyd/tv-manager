@@ -1,4 +1,5 @@
 const express = require('express');
+const apicache = require('apicache');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
@@ -9,10 +10,11 @@ const ROOT_URL = 'https://api.themoviedb.org/3/';
 
 // App Setup
 const app = express();
+const cache = apicache.middleware;
 app.use(morgan('combined'));
 app.use(bodyParser.json({ type: '*/*' }));
-const router = express.Router();
-app.use('/api', router);
+// const router = express.Router();
+// app.use('/api', router);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
@@ -26,8 +28,9 @@ if (process.env.NODE_ENV === 'production') {
 //   res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 // });
 
+
 // Routes
-router.get('/discover', function(req, res) {
+app.get('/api/discover', cache('1 day'), function(req, res) {
   const url = ROOT_URL + 'discover/tv?api_key=' + api_key + '&sort_by=popularity.desc&first_air_date_year=2016&with_original_language=en&page=1';
     axios.get(url)
       .then( function(response) {
@@ -37,7 +40,7 @@ router.get('/discover', function(req, res) {
       });
 });
 
-router.get('/config', function(req, res) {
+app.get('/api/config', cache('3 days'), function(req, res) {
   const url_config = ROOT_URL + 'configuration?api_key=' + api_key;
     axios.get(url_config)
       .then( function(config) {
@@ -46,6 +49,18 @@ router.get('/config', function(req, res) {
         throw error;
       });
 });
+
+app.get('/api/search', function(req, res) {
+  const url = ROOT_URL + 'search/tv?api_key=' + api_key + '&query=' + req.query.term + '&page=1';
+    axios.get(url)
+      .then( function(response) {
+        res.send(response.data);
+      }).catch(function(error) {
+        throw error;
+      });
+});
+
+
 
 // Server setup
 const PORT = process.env.PORT || 8080;

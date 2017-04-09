@@ -15,11 +15,14 @@
   },
   "homepage": "https://github.com/dansyd/tv-manager#readme",
   "dependencies": {
+    "apicache": "^0.8.4",
     "axios": "^0.16.0",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "install": "^0.8.8",
     "morgan": "^1.8.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "npm": "^4.4.4"
   },
   "engines": {
     "node": "6.9.2",

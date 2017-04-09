@@ -8,39 +8,3 @@
   display: flex;
   flex-wrap: wrap;
 }
-
-.shows-list-item {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  width: 23%;
-  padding: 1em 0 0 0;
-  margin: 1%;
-  box-shadow: 2px 2px 30px rgba(150, 150, 150, .5);
-}
-
-.shows-list-item img{
-  width: 100%;
-}
-.shows-list-item h3 {
-  margin-top: 0;
-}
-
-button,
-.main-btn {
-  font-size: 1em;
-  line-height: 1.4em;
-  background: rgb(0, 223, 190);
-  color: white;
-  border-radius: 4px;
-  padding: 7px 13px;
-  border: 2px solid white;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.2s;
-}
-
-button:hover,
-.main-btn:hover {
-background-color: white;
-color: rgb(0, 223, 190);
-}
