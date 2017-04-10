@@ -1,36 +1,38 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchShow } from '../actions/action_shows';
+import Loader from './Loader';
 
 class ShowInfo extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {show: null};
-  }
-
   componentWillMount() {
-    // const {showId} = this.props.match.params;
-    // const url = `${TMDB_ROOT_URL}tv/${showId}?api_key=${api_key}`;
-    // axios.get(url)
-    //   .then( response => {
-    //     this.setState({show: response.data})
-    //   }).catch(error => {
-    //     throw error;
-    //   })
+    this.props.actions.fetchShow(this.props.params.showId);
   }
 
   render() {
-    const {show} = this.state;
+    const {show} = this.props;
     if (!show) {
-      return <h2>Loading.....</h2>
+      return <Loader />
     }
     return (
       <div>
-        {this.state.show.name}
+        {show.name}
       </div>
     )
   }
 }
 
-export default ShowInfo;
+const mapStateToProps = (state) => {
+  return {
+    show: state.shows.show
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators({fetchShow}, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowInfo);

@@ -5,16 +5,14 @@ const morgan = require('morgan');
 const path = require('path');
 const axios = require('axios');
 
-const api_key = require('./config');
 const ROOT_URL = 'https://api.themoviedb.org/3/';
+const api_key = process.env.TMDB_API_KEY;
 
 // App Setup
 const app = express();
 const cache = apicache.middleware;
 app.use(morgan('combined'));
 app.use(bodyParser.json({ type: '*/*' }));
-// const router = express.Router();
-// app.use('/api', router);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
@@ -51,15 +49,24 @@ app.get('/api/config', cache('3 days'), function(req, res) {
 });
 
 app.get('/api/search', function(req, res) {
-  const url = ROOT_URL + 'search/tv?api_key=' + api_key + '&query=' + req.query.term + '&page=1';
+  const url = ROOT_URL + 'search/tv?api_key=' + api_key + '&query=' + req.query.q + '&page=1';
     axios.get(url)
-      .then( function(response) {
+      .then(function(response) {
         res.send(response.data);
       }).catch(function(error) {
         throw error;
       });
 });
 
+app.get('/api/show/:id', function(req, res) {
+  const url = ROOT_URL + 'tv/' + req.params.id + '?api_key=' + api_key;
+    axios.get(url)
+      .then(function(response) {
+        res.send(response.data);
+      }).catch(function(error) {
+        throw error;
+      });
+});
 
 
 // Server setup

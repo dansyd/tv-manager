@@ -9,6 +9,6 @@ import ShowList from './components/ShowList';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={ShowList} />
-    <Route path="shows/:id" component={ShowInfo} />
+    <Route path="show/:showId" component={ShowInfo} />
   </Route>
 )

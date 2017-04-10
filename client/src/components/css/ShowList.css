@@ -3,7 +3,7 @@
   text-align: center;
 }
 
-.shows-list {
+.show-list {
   list-style: none;
   display: flex;
   flex-wrap: wrap;

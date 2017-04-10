@@ -1,86 +1,62 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './css/ShowsList.css';
+import { connect } from 'react-redux';
+import { fetchDiscoverShows } from '../actions/action_shows';
+import { fetchUrlConfig } from '../actions/action_shows';
+import { fetchSearchShow } from '../actions/action_shows';
+import { bindActionCreators } from 'redux';
+
 import ShowItem from './ShowItem';
 import CTA from './static/CTA';
 import SearchFilter from './SearchFilter';
 import SearchBar from './SearchBar';
 
+import './css/ShowList.css';
+
 
 class ShowsList extends Component {
-  constructor() {
-    super();
-
-    this.handleSearchTermChange = this.handleSearchTermChange.bind(this);
-    this.handleClearSearch = this.handleClearSearch.bind(this);
-
-    this.state = { shows: [], urlConfig: null, searchTerm: null };
-  }
 
   renderShows() {
-    return this.state.shows.map( show => {
-      return <ShowItem key={show.id} show={show} urlConfig={this.state.urlConfig}/>
+    return this.props.shows.showList.map( show => {
+      return <ShowItem key={show.id} show={show} urlConfig={this.props.shows.urlConfig}/>
     })
   }
 
-  fetchDiscoverTVShows() {
-    const url = '/api/discover'
-    axios.get(url)
-      .then( response => {
-        const shows = response.data;
-        this.setState({ shows, searchTerm: null });
-      }).catch(error => {
-        throw error;
-      });
-  }
-
   componentWillMount() {
-
-    this.fetchDiscoverTVShows();
-
-    const url = '/api/config'
-    axios.get(url)
-      .then( response => {
-        const urlConfig = response.data;
-        this.setState({ urlConfig });
-      }).catch(error => {
-        throw error;
-      });
-  }
-
-  handleClearSearch() {
-    this.fetchDiscoverTVShows();
-  }
-
-  handleSearchTermChange(term) {
-    const url = `/api/search?term=${term}`
-    axios.get(url)
-      .then( response => {
-        const shows = response.data.results;
-        this.setState({ shows, searchTerm: term });
-      }).catch(error => {
-        throw error;
-      });
+    this.props.actions.fetchDiscoverShows();
+    this.props.actions.fetchUrlConfig();
   }
 
   render() {
     return (
       <div>
         <CTA />
-        <SearchBar onSearchTermChange={this.handleSearchTermChange} />
+        <SearchBar onSearchTermChange={ (term) => this.props.actions.fetchSearchShow(term) } />
         <div className="shows container">
           <SearchFilter
-            searchTerm={this.state.searchTerm}
-            onClearSearch={this.handleClearSearch}
+            searchTerm={this.props.shows.searchTerm}
+            onClearSearch={ () => this.props.actions.fetchDiscoverShows() }
           />
-          <ul className="shows-list">
+
+          <ul className="show-list">
             {this.renderShows()}
           </ul>
         </div>
       </div>
     )
   }
-
 }
 
-export default ShowsList;
+const mapStateToProps = (state) => {
+  return {
+    shows: state.shows
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators({fetchDiscoverShows, fetchUrlConfig, fetchSearchShow}, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowsList);

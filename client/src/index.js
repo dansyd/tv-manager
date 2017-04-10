@@ -2,12 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import Reducers from './reducers/index';
+import Thunk from 'redux-thunk';
 
 import './index.css';
 
-export const TMDB_ROOT_URL = 'https://api.themoviedb.org/3/';
+const createStoreWithMiddleware = applyMiddleware(Thunk)(createStore);
+const store = createStoreWithMiddleware(Reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
 
 ReactDOM.render(
-  <Router history={browserHistory} routes={routes} />,
+  <Provider store={store}>
+    <Router history={browserHistory} routes={routes} />
+  </Provider>
+  ,
   document.getElementById('root')
 );
