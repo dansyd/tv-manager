@@ -1,9 +1,9 @@
-span {
+.active-search-filter {
   padding: .3em .5em;
   border-radius: 4px;
   background-color: rgba(0, 223, 190, 0.2);
 }
 
-span svg:hover {
+.active-search-filter svg:hover {
   cursor: pointer;
 }

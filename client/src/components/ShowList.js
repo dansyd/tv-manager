@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { fetchDiscoverShows } from '../actions/action_shows';
 import { fetchUrlConfig } from '../actions/action_shows';
@@ -16,15 +15,19 @@ import './css/ShowList.css';
 
 class ShowsList extends Component {
 
+  componentWillMount() {
+    if (!this.props.shows.searchTerm) {
+      this.props.actions.fetchDiscoverShows();
+    }
+    if (!this.props.shows.urlConfig) {
+      this.props.actions.fetchUrlConfig();
+    }
+  }
+
   renderShows() {
     return this.props.shows.showList.map( show => {
       return <ShowItem key={show.id} show={show} urlConfig={this.props.shows.urlConfig}/>
     })
-  }
-
-  componentWillMount() {
-    this.props.actions.fetchDiscoverShows();
-    this.props.actions.fetchUrlConfig();
   }
 
   render() {

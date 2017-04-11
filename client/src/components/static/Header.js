@@ -1,5 +1,6 @@
 import React from 'react';
 import './css/Header.css';
+import { Link } from 'react-router';
 
 const Header = (props) => {
   return (
@@ -10,7 +11,7 @@ const Header = (props) => {
             TV Manager
           </div>
           <nav className="main-nav">
-            <a href="#">Home</a>
+            <Link to="/">Home</Link>
             <a href="#">Sign In</a>
             <a href="#">Sign Up</a>
           </nav>

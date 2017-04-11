@@ -8,7 +8,7 @@ const INITIAL_STATE = {showList: [], urlConfig: null, searchTerm: null, show: nu
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_SHOWS_SUCCESS:
-      return {...state, showList: action.shows, searchTerm: null};
+      return {...state, showList: action.shows, searchTerm: null, show: null};
     case FETCH_SHOW_SUCCESS:
       return {...state, show: action.show};
     case FETCH_SEARCH_SUCCESS:
