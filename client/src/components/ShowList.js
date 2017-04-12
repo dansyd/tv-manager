@@ -1,65 +1,44 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchDiscoverShows } from '../actions/action_shows';
-import { fetchUrlConfig } from '../actions/action_shows';
-import { fetchSearchShow } from '../actions/action_shows';
-import { bindActionCreators } from 'redux';
+import React from 'react'
+import MdAddCircle from 'react-icons/lib/md/add-circle';
+import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
+import './css/ShowItem.css';
+import { Link } from 'react-router';
 
-import ShowItem from './ShowItem';
-import CTA from './static/CTA';
-import SearchFilter from './SearchFilter';
-import SearchBar from './SearchBar';
+const renderShows = (shows, urlConfig) => {
 
-import './css/ShowList.css';
+  return shows.map( show => {
 
-
-class ShowsList extends Component {
-
-  componentWillMount() {
-    if (!this.props.shows.searchTerm) {
-      this.props.actions.fetchDiscoverShows();
+    let imgUrl = '';
+    if (show.poster_path) {
+      imgUrl = urlConfig.images.base_url + urlConfig.images.poster_sizes[3] + show.poster_path;
+    } else {
+      imgUrl = '/images/no-thumb.jpg';
     }
-    if (!this.props.shows.urlConfig) {
-      this.props.actions.fetchUrlConfig();
-    }
-  }
 
-  renderShows() {
-    return this.props.shows.showList.map( show => {
-      return <ShowItem key={show.id} show={show} urlConfig={this.props.shows.urlConfig}/>
-    })
-  }
-
-  render() {
     return (
-      <div>
-        <CTA />
-        <SearchBar onSearchTermChange={ (term) => this.props.actions.fetchSearchShow(term) } />
-        <div className="shows container">
-          <SearchFilter
-            searchTerm={this.props.shows.searchTerm}
-            onClearSearch={ () => this.props.actions.fetchDiscoverShows() }
-          />
-
-          <ul className="show-list">
-            {this.renderShows()}
-          </ul>
+      <li key={show.id} className="shows-list-item">
+        <h3>{show.name}</h3>
+        <img src={imgUrl} alt={`${show.name} poster`}/>
+        <div className="show-controls">
+          <Link to={`/show/${show.id}`} className="main-btn ctrl-btn"> <MdRemoveRedEye /> Show Info</Link>
+          <button className="ctrl-btn"> <MdAddCircle />Watchlist</button>
         </div>
-      </div>
+      </li>
     )
-  }
+  })
 }
 
-const mapStateToProps = (state) => {
-  return {
-    shows: state.shows
+const ShowList = ({shows, urlConfig}) => {
+
+  if (!urlConfig) {
+    return <div>Loading...</div>
   }
+
+  return (
+    <ul className="show-list">
+      {renderShows(shows, urlConfig)}
+    </ul>
+  )
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators({fetchDiscoverShows, fetchUrlConfig, fetchSearchShow}, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShowsList);
+export default ShowList;

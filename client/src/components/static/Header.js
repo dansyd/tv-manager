@@ -12,8 +12,6 @@ const Header = (props) => {
           </div>
           <nav className="main-nav">
             <Link to="/">Home</Link>
-            <a href="#">Sign In</a>
-            <a href="#">Sign Up</a>
           </nav>
         </div>
       </div>

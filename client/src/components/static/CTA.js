@@ -7,8 +7,6 @@ const CTA = (props) => {
       <div className="container">
         <div className="cta-message">
           <h1>Welcome to Tv Manager</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis ullam autem possimus debitis nam recusandae ad perspiciatis, unde iure rerum soluta doloribus nulla quod, similique molestias voluptates. Similique, aliquam, repellendus.</p>
-          <a href="" className="main-btn">Sign Up</a>
         </div>
       </div>
     </section>

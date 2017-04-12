@@ -3,12 +3,12 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
 import ShowInfo from './components/ShowInfo';
-import ShowList from './components/ShowList';
+import Homepage from './components/Homepage';
 
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={ShowList} />
+    <IndexRoute component={Homepage} />
     <Route path="show/:showId" component={ShowInfo} />
   </Route>
 )

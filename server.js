@@ -58,7 +58,7 @@ app.get('/api/search', function(req, res) {
       });
 });
 
-app.get('/api/show/:id', function(req, res) {
+app.get('/api/show/:id', cache('1 hour'), function(req, res) {
   const url = ROOT_URL + 'tv/' + req.params.id + '?api_key=' + api_key;
     axios.get(url)
       .then(function(response) {
@@ -68,6 +68,15 @@ app.get('/api/show/:id', function(req, res) {
       });
 });
 
+app.get('/api/show/:id/cast', cache('1 hour'), function(req, res) {
+  const url = ROOT_URL + 'tv/' + req.params.id + '/credits?api_key=' + api_key;
+    axios.get(url)
+      .then(function(response) {
+        res.send(response.data);
+      }).catch(function(error) {
+        throw error;
+      });
+});
 
 // Server setup
 const PORT = process.env.PORT || 8080;

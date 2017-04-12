@@ -3,18 +3,25 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position-x: center;
-  background-blend-mode: lighten;
-  padding: 5%;
+  padding: 5% 0;
 }
 
 .show-wrapper {
   display: flex;
+  flex-direction: column;
   color: white;
   background-color: rgba(50,50,50,.9);
   box-shadow: 0px 0px 50px rgb(0, 0, 0);
 }
 
+.show-img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center
+}
+
 .show-info {
+  width: 100%;
   padding: 2em;
 }
 
@@ -25,6 +32,7 @@
   color: rgb(0, 223, 190);
   text-transform: uppercase;
   letter-spacing: .1em;
+  margin-top: 0;
 }
 
 .show-info .label {
@@ -40,4 +48,21 @@
 .show-details div {
   width: 50%;
   margin-bottom: 1em;
+}
+
+@media only screen
+  and (min-device-width: 1024px) {
+
+  .show-wrapper {
+    flex-direction: row;
+  }
+
+  .show-img {
+    width: 40%;
+  }
+
+  .show-info {
+    width: 60%;
+  }
+
 }

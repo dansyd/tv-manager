@@ -1,0 +1,15 @@
+footer {
+  font-size: 10px;
+  text-align: center;
+  padding: 1.5em;
+  background-color: rgb(50,50,50);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer img {
+  height: 3em;
+  padding: 0 1em;
+}
