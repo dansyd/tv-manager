@@ -1,7 +1,7 @@
 import React from 'react'
-import MdAddCircle from 'react-icons/lib/md/add-circle';
+// import MdAddCircle from 'react-icons/lib/md/add-circle';
 import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
-import './css/ShowItem.css';
+import './css/ShowList.css';
 import { Link } from 'react-router';
 
 const renderShows = (shows, urlConfig) => {
@@ -17,11 +17,9 @@ const renderShows = (shows, urlConfig) => {
 
     return (
       <li key={show.id} className="shows-list-item">
-        <h3>{show.name}</h3>
         <img src={imgUrl} alt={`${show.name} poster`}/>
         <div className="show-controls">
           <Link to={`/show/${show.id}`} className="main-btn ctrl-btn"> <MdRemoveRedEye /> Show Info</Link>
-          <button className="ctrl-btn"> <MdAddCircle />Watchlist</button>
         </div>
       </li>
     )

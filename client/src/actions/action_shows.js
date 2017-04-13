@@ -27,18 +27,11 @@ export function fetchShow(showId) {
   const url = `/api/show/${showId}`;
   return function (dispatch) {
     axios.get(url)
-      .then(show => {
-
-        axios.get(`/api/show/${showId}/cast`)
-          .then(cast => {
-            dispatch({
-              type: FETCH_SHOW_SUCCESS,
-              show: show.data,
-              cast: cast.data
-            });
-          }).catch(error => {
-            throw error;
-          });
+      .then(res => {
+        dispatch({
+          type: FETCH_SHOW_SUCCESS,
+          show: res.data,
+        });
       }).catch(error => {
         throw error;
       });

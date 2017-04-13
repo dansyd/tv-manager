@@ -7,7 +7,7 @@
 body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 200;
-  font-size: 14px;
+  font-size: 10px;
   line-height: 1.4em;
   color: rgb(50, 50, 50);
   margin: 0;
@@ -15,7 +15,7 @@ body {
 }
 
 .container {
-  max-width: 80%;
+  max-width: 90%;
   margin: 0 auto;
 }
 
@@ -27,3 +27,17 @@ a {
 }
 
 textarea, input, button { outline: none; }
+
+@media only screen
+  and (min-device-width: 1024px) {
+
+  body {
+    font-size: 14px;
+    line-height: 1.4em;
+  }
+
+  .container {
+    max-width: 85%;
+  }
+
+}

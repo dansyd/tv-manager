@@ -1,9 +1,12 @@
+.show-list {
+  padding: 0;
+}
+
 .shows-list-item {
   display: flex;
   flex-direction: column;
   background-color: white;
-  width: 23%;
-  padding: 1em 0 0 0;
+  width: 48%;
   margin: 1%;
   box-shadow: 2px 2px 30px rgba(150, 150, 150, .5);
 }
@@ -42,7 +45,7 @@ color: rgb(0, 223, 190);
 .ctrl-btn {
   border: 0;
   border-radius: 0;
-  width: 50%;
+  width: 100%;
   padding: 1em 0;
 }
 
@@ -53,4 +56,14 @@ button.ctrl-btn {
 button.ctrl-btn:hover {
   background-color: white;
   color: rgb(228, 91, 40);
+}
+
+
+@media only screen
+  and (min-device-width: 1024px) {
+
+  .shows-list-item {
+    width: 23%;
+  }
+
 }

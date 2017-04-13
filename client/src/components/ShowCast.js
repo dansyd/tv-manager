@@ -29,9 +29,12 @@ const renderCast = (cast, urlCast) => {
 }
 
 const ShowCast = ({cast, urlCast}) => {
+  if (cast.length === 0) {
+    return <noscript />
+  }
   return (
     <div className="show-cast">
-    <p><span className="label">Cast</span></p>
+    <span className="label"><h3>Cast</h3></span>
       <ul>
         {renderCast(cast, urlCast)}
       </ul>
