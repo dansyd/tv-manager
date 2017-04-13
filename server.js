@@ -78,7 +78,7 @@ app.get('/api/show/:id/cast', cache('1 hour'), function(req, res) {
 
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
 });
 
 // Server setup
