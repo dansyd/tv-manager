@@ -22,9 +22,6 @@ if (process.env.NODE_ENV === 'production') {
 // app.use(express.static(path.resolve(__dirname, 'build')));
 //
 // Always return the main index.html, so react-router render the route in the client
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-});
 
 
 // Routes
@@ -77,6 +74,11 @@ app.get('/api/show/:id/cast', cache('1 hour'), function(req, res) {
         throw error;
       });
 });
+
+app.get('*', (req, res) => {
+  res.sendFile('index.html');
+});
+
 
 // Server setup
 const PORT = process.env.PORT || 8080;
