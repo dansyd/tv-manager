@@ -8,7 +8,7 @@ const Header = (props) => {
       <div className="container">
         <div className="header-wrapper">
           <div className="logo">
-            TV Manager
+            <Link to="/">TV Manager</Link>
           </div>
           <nav className="main-nav">
             <Link to="/">Home</Link>

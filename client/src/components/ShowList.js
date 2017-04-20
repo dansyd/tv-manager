@@ -16,12 +16,15 @@ const renderShows = (shows, urlConfig) => {
     }
 
     return (
-      <li key={show.id} className="shows-list-item">
-        <img src={imgUrl} alt={`${show.name} poster`}/>
-        <div className="show-controls">
-          <Link to={`/show/${show.id}`} className="main-btn ctrl-btn"> <MdRemoveRedEye /> Show Info</Link>
-        </div>
-      </li>
+      <Link to={`/show/${show.id}`} key={show.id} className="shows-list-item">
+        <li>
+
+            <img src={imgUrl} alt={`${show.name} poster`}/>
+            <div className="show-controls">
+              <div className="main-btn ctrl-btn"> <MdRemoveRedEye /> Show Info</div>
+            </div>
+        </li>
+      </Link>
     )
   })
 }

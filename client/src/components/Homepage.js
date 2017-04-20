@@ -13,7 +13,7 @@ import './css/Homepage.css';
 
 class Homepage extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     if (!this.props.shows.searchTerm) {
       this.props.actions.fetchDiscoverShows();
     }
@@ -27,7 +27,7 @@ class Homepage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="homepage-container">
         <CTA />
         <SearchBar onSearchTermChange={ (term) => this.props.actions.fetchSearchShow(term) } />
         <div className="shows container">

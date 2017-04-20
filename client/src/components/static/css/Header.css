@@ -16,6 +16,10 @@ header {
   font-size: 2.5em;
 }
 
+.logo a {
+  color: white;
+}
+
 .main-nav a {
   color: white;
 }

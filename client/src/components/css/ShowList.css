@@ -3,12 +3,16 @@
 }
 
 .shows-list-item {
-  display: flex;
-  flex-direction: column;
   background-color: white;
   width: 48%;
   margin: 1%;
+  padding: 0;
   box-shadow: 2px 2px 30px rgba(150, 150, 150, .5);
+}
+
+.shows-list-item li {
+  display: flex;
+  flex-direction: column;
 }
 
 .shows-list-item img{
